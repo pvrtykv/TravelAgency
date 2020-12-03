@@ -33,7 +33,7 @@ Examples of SQL queries that were used in the app.
 2. Add new client
 ```sql
 INSERT INTO client (id, full_name, phone_number)
-VALUES ('{id_}', '{full_name}', '{phone_number});
+VALUES ('{id_}', '{full_name}', '{phone_number}');
 ```
 
 ### Database
