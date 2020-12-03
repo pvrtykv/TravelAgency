@@ -13,7 +13,7 @@ def main_menu():
         client_interface()
     elif choice == "2":
         employee_interface()
-    elif choice == "3":m
+    elif choice == "3":
         sys.exit()
 
 
@@ -30,6 +30,8 @@ def client_interface():
         utils.show_your_info(id_)
     elif choice == "3":
         main_menu()
+    print()
+    client_interface()
 
 
 def employee_interface():
@@ -44,3 +46,4 @@ def employee_interface():
         utils.show_client_info()
     elif choice == "3":
         main_menu()
+    employee_interface()
