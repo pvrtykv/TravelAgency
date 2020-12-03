@@ -1,6 +1,21 @@
 import pymysql.cursors
 
 
+def run_sql(sql):
+    connection = pymysql.connect(host='localhost',
+                                 user='root',
+                                 db='travel_agency')
+    try:
+        connection.commit()
+        with connection.cursor() as cursor:
+            cursor.execute(sql)
+            connection.commit()
+
+
+    finally:
+        connection.close()
+
+
 def show_results(sql):
     connection = pymysql.connect(host='localhost',
                                  user='root',
@@ -25,7 +40,7 @@ def show_results(sql):
 
 
 def show_offers():
-    sql = "SELECT o.name,  l.city_name AS city, c.name AS country," \
+    sql = "SELECT o.id, o.name,  l.city_name AS city, c.name AS country," \
           " h.name as hotel, h.stars, o.trip_price FROM offer o " \
           "INNER JOIN location l ON o.location_id = l.id INNER JOIN country c" \
           " ON l.country_id = c.id INNER JOIN hotel h ON o.hotel_id = h.id "
@@ -69,14 +84,35 @@ def narrow_offer_search(sql):
 
     show_results(sql)
 
+def delete_offer():
+    id_ = input("Podaj id wycieczki: ")
+    sql = f"DELETE FROM offer WHERE id = '{id_}'"
+    run_sql(sql)
+    show_offers()
+
 
 def show_client_info():
     sql = "SELECT * FROM `client`"
     show_results(sql)
 
 
-
 def show_your_info(id_):
     sql = f"SELECT * FROM `client` WHERE id = \"{id_}\""
     show_results(sql)
 
+
+def add_client():
+    id_ = input("Podaj id nowego klienta: ")
+    full_name = input("Podaj imię i nazwisko: ")
+    phone_number = input("Podaj numer telefonu: ")
+    sql = f"INSERT INTO client (id, full_name, phone_number) " \
+          f"VALUES ('{id_}', '{full_name}', '{phone_number}')"
+    run_sql(sql)
+    show_client_info()
+
+
+def delete_client():
+    id_ = input("Podaj id klienta: ")
+    sql = f"DELETE FROM client WHERE id = '{id_}'"
+    run_sql(sql)
+    show_client_info()

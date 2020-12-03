@@ -19,8 +19,8 @@ def main_menu():
 
 def client_interface():
     choice = input("Wybierz:\n"
-                   "1. Chcę wyświetlić dostępne wycieczki\n"
-                   "2. Chcę wyświetlić swoje dane\n"
+                   "1. Wyświetl dostępne wycieczki\n"
+                   "2. Wyświetl moje dane\n"
                    "3. Powrót do menu głównego\n"
                    )
     if choice == "1":
@@ -36,14 +36,39 @@ def client_interface():
 
 def employee_interface():
     choice = input("Wybierz:\n"
-                   "1. Chce wyświetlić dostępne wycieczki \n"
-                   "2. Chcę wyświetlić dane o klientach \n"
+                   "1. Zarządzaj wycieczkami \n"
+                   "2. Zarządzaj danymi klientów \n"
                    "3. Powrót do menu głównego\n")
 
     if choice == "1":
-        utils.show_offers()
+        manage_offers()
     elif choice == "2":
-        utils.show_client_info()
+        manage_client_info()
     elif choice == "3":
         main_menu()
     employee_interface()
+
+
+def manage_offers():
+    choice = input("Wybierz: \n"
+                   "1. Wyświetl dostępne oferty \n"
+                   "2. Usuń ofertę\n")
+    if choice == "1":
+        utils.show_offers()
+    elif choice == "2":
+        utils.delete_offer()
+
+
+def manage_client_info():
+    choice = input("Wybierz:\n"
+                   "1. Wyświetl dane klientów\n"
+                   "2. Dodaj nowego klienta\n"
+                   "3. Usuń klienta \n")
+    if choice == "1":
+        utils.show_client_info()
+    elif choice == "2":
+        utils.add_client()
+    elif choice == "3":
+        utils.delete_client()
+
+
